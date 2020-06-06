@@ -16,7 +16,7 @@ private:
     double dx, dy;
     double h;
 
-    unsigned int max_size_of_value_list = 50;
+    unsigned int max_size_of_value_list = 100;
     int **Hashtable;
 
     unsigned int max_size_of_particle_neighborhood;
@@ -45,5 +45,4 @@ public:
     void updateForcesAndAcceleration();
     void eulerIntegration(double dt);
     void freeAndReallocateHashtable();
-    void getContainerPosition(int, glm::vec3&, int);
 };

@@ -23,8 +23,8 @@ Fluid::Fluid(unsigned int _nx, unsigned int _ny, double m, double _dx, double _d
 	dx = _dx;
 	dy = _dy;
 	h = _h;
-	Nx = (int)((nx * dx + 2 * 0.21 * nx * dx) / h) + 1;
-	Ny = (int)((ny * dy + 2 * 0.21 * ny * dy) / h) + 1;
+	Nx = (int)((nx * dx + 2 * 2.21 * nx * dx) / h) + 1;
+	Ny = (int)((ny * dy + 2 * 2.21 * ny * dy) / h) + 1;
 	// Initialize arrays of particles
 	mass = new double[nx * ny];
 	positionX = new double[nx * ny];
@@ -41,8 +41,8 @@ Fluid::Fluid(unsigned int _nx, unsigned int _ny, double m, double _dx, double _d
 		for (int i = 0; i < nx; i++)
 		{
 			mass[j * nx + i] = m;
-			positionX[j * nx + i] = i * dx - 0.1f;
-			positionY[j * nx + i] = j * dy - 0.1f;
+			positionX[j * nx + i] = i * dx;
+			positionY[j * nx + i] = j * dy;
 			velocityX[j * nx + i] = 0.0f;
 			velocityY[j * nx + i] = 0.0f;
 			density[j * nx + i] = 1.0f;
@@ -109,8 +109,8 @@ void Fluid::initializeSpatialHashtable()
 	{
 		for (int i = 0; i < nx; i++)
 		{
-			int cx = (int)((positionX[j * nx + i] + 0.21 * nx * dx - 0.1f) / h);
-			int cy = (int)((positionY[j * nx + i] + 0.21 * ny * dy - 0.1f) / h);
+			int cx = (int)((positionX[j * nx + i] + 2.21 * nx * dx) / h);
+			int cy = (int)((positionY[j * nx + i] + 2.21 * ny * dy) / h);
 			int c = cy * Nx + cx;
 			int k = 0;
 			while (k < max_size_of_value_list && Hashtable[c][k] != -1)
@@ -168,8 +168,8 @@ void Fluid::neighborSearch()
 	{
 		for (int i = 0; i < nx; i++)
 		{
-			int cx = (int)((positionX[j * nx + i] + 0.21 * nx * dx - 0.1f) / h);
-			int cy = (int)((positionY[j * nx + i] + 0.21 * ny * dy - 0.1f) / h);
+			int cx = (int)((positionX[j * nx + i] + 2.21 * nx * dx) / h);
+			int cy = (int)((positionY[j * nx + i] + 2.21 * ny * dy) / h);
 			int neighborhood_idx = 0;
 			for (int k = 0; k < 9; k++)
 			{
@@ -269,19 +269,6 @@ void Fluid::freeAndReallocateHashtable()
 	}
 	free(Hashtable); Hashtable = NULL;
 	Hashtable = new int* [Nx * Ny];
-}
-
-void Fluid::getContainerPosition(int idx, glm::vec3& pos, int num_points)
-{
-	// creates circle
-	double r = max(nx * dx * 0.71f, ny * dy * 0.71f);
-	double cx = nx * dx * 0.5 - 0.1;
-	double cy = ny * dy * 0.5 - 0.1;
-	float theta = idx * (2 * pi * (1/num_points)) - pi;
-	float x = r * cosf(theta);
-	float y = r * sinf(theta);
-
-	pos.x = cx+x; pos.y = cy+y; pos.z=0.0f;
 }
 
 //////////////////////////////// END OF PUBLIC METHODS ////////////////////////////////////

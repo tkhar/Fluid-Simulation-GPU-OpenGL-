@@ -18,12 +18,12 @@ using namespace std;
 
 // Constants to be used
 ///////////////////////////////////////////////////////
-#define nx 7 // number of particles in x dimension
-#define ny 7 // number of particles in y dimension
-#define dx 0.35f // initial spacing between particles 
-#define dy 0.35f // initial spacing between particles
-#define m 0.1f // mass
-#define h 0.8f // SPH radius
+#define nx 20 // number of particles in x dimension
+#define ny 20 // number of particles in y dimension
+#define dx 0.7f // initial spacing between particles 
+#define dy 0.7f // initial spacing between particles
+#define m 0.3f // mass
+#define h 0.3f // SPH radius
 
 #define DEBUG
 
@@ -34,8 +34,8 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
 // settings
-const unsigned int SCR_WIDTH = 1200;
-const unsigned int SCR_HEIGHT = 1000;
+const unsigned int SCR_WIDTH = 2400;
+const unsigned int SCR_HEIGHT = 1600;
 
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -114,13 +114,6 @@ int main()
          0.0f,  0.5f, 0.0f  // top
     };
 
-    float containerVertices[] = {
-        -0.5f, -0.5f, 0.0f, // left  
-         0.5f, -0.5f, 0.0f, // right 
-         0.0f,  0.5f, 0.0f  // top
-    };
-
-
     unsigned int VBOs[2], VAOs[2];
     glGenVertexArrays(2, VAOs);
     glGenBuffers(2, VBOs);
@@ -174,7 +167,6 @@ int main()
             model = glm::translate(model, fluid.getPosition(i));
             model = glm::scale(model, glm::vec3(0.05, 0.05, 1));
             particleShader.setMat4("model", model);
-
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
         //////////////// done rendering particles /////////////////////////
