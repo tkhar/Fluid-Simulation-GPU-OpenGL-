@@ -163,6 +163,7 @@
     <None Include="containerShader.vs" />
     <None Include="fluidSimulatorShader.fs" />
     <None Include="fluidSimulatorShader.vs" />
+    <None Include="gpu_fluid_simulator.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

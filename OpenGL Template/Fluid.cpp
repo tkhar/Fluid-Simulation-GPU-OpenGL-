@@ -9,7 +9,7 @@ using namespace std;
 #define pres_dens_coef 10.0f // pressure-density coefficient
 #define rest_density 10.0f // rest density parameter
 #define gX 0.0f// gravity X
-#define gY -1.0f// gravity Y
+#define gY 1.0f// gravity Y
 #define viscocity_coeff 10.0f // viscocity coefficient
 #define stiffness_coeff 100.0f // stiffness for environmental respeonse
 #define pi 3.14159

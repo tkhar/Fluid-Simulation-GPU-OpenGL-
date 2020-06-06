@@ -57,5 +57,8 @@
     <None Include="containerShader.fs">
       <Filter>Source Files\shaders</Filter>
     </None>
+    <None Include="gpu_fluid_simulator.cu">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

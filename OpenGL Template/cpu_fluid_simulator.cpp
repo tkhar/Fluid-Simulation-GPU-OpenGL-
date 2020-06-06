@@ -11,6 +11,7 @@
 #include <cmath>
 #include <algorithm>
 #include <cstdio>
+#include <chrono>
 
 #include "Fluid.h"
 
@@ -18,12 +19,12 @@ using namespace std;
 
 // Constants to be used
 ///////////////////////////////////////////////////////
-#define nx 20 // number of particles in x dimension
-#define ny 20 // number of particles in y dimension
-#define dx 0.7f // initial spacing between particles 
-#define dy 0.7f // initial spacing between particles
+#define nx 50 // number of particles in x dimension
+#define ny 50 // number of particles in y dimension
+#define dx 0.3f // initial spacing between particles 
+#define dy 0.3f // initial spacing between particles
 #define m 0.3f // mass
-#define h 0.3f // SPH radius
+#define h 0.8f // SPH radius
 
 #define DEBUG
 
@@ -124,6 +125,8 @@ int main()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
+    int it=0;
+    auto start = chrono::high_resolution_clock::now();
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -193,7 +196,11 @@ int main()
         fluid.spatialHashTableInit();
         fluid.initializeSpatialHashtable();
         fluid.generateGLMParticles();
+        it++;
     }
+    auto stop = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::milliseconds>(stop-start);
+    cout << "Time required: " << duration.count() << " milliseconds for " << it << " iterations." << endl;
 
     // optional: de-allocate all resources once they've outlived their purpose:
     // ------------------------------------------------------------------------
