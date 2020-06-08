@@ -19,8 +19,8 @@ using namespace std;
 
 // Constants to be used
 ///////////////////////////////////////////////////////
-#define nx 50 // number of particles in x dimension
-#define ny 50 // number of particles in y dimension
+#define nx 15 // number of particles in x dimension
+#define ny 15 // number of particles in y dimension
 #define dx 0.3f // initial spacing between particles 
 #define dy 0.3f // initial spacing between particles
 #define m 0.3f // mass
@@ -39,7 +39,7 @@ const unsigned int SCR_WIDTH = 2400;
 const unsigned int SCR_HEIGHT = 1600;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(3.0f, 0.0f, 6.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
